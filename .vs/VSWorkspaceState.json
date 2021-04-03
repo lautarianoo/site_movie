@@ -5,8 +5,9 @@
     "\\movies\\templates",
     "\\movies\\templates\\movies",
     "\\site_movie",
-    "\\static"
+    "\\static",
+    "\\static\\css"
   ],
-  "SelectedNode": "\\movies\\views.py",
+  "SelectedNode": "\\movies\\models.py",
   "PreviewInSolutionExplorer": false
 }
