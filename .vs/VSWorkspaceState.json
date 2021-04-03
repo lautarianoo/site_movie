@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\movies",
+    "\\movies\\templates",
+    "\\movies\\templates\\movies",
+    "\\site_movie",
+    "\\static"
+  ],
+  "SelectedNode": "\\movies\\views.py",
+  "PreviewInSolutionExplorer": false
+}
