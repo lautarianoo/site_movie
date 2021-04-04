@@ -32,13 +32,17 @@
                     <li style="list-style: none">
                                     <span><b>Режиссер:</b>
                                         {% for director in movie.directors.all %}
+                                         <a href="{% url 'movies:actor_detail' director.name %}">
                                             {{ director.name }}
+                                         </a>
                                         {% endfor %}
                                     </span>
                     </li>
                     <li style="list-style: none"><span><b>Актеры:</b>
                         {% for actor in movie.actors.all %}
+                        <a href="{% url 'movies:actor_detail' actor.name %}">
                             {{ actor.name }}
+                        </a>
                         {% endfor %}
                                 </span>
                     </li>
@@ -112,16 +116,7 @@
                 {% endfor %}
             </p>
             <p class="editContent">
-                {{ movie.description }}
-            </p>
-            <p class="mt-3 italic-blue editContent">
-                <iframe width="560" height="315"
-                        src="http://www.youtube.com/watch?v=PSS4C0NkMEU"
-                        frameborder="0" allow="accelerometer; autoplay;
-                        encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </p>
+                {{ movie.description|safe }}
         </div>
         <hr>
         <div class="row">
