@@ -58,6 +58,7 @@ let html = '\
     </div>\
 {{/movies}}'
 
+// Add star rating
 const rating = document.querySelector('form[name=rating]');
 
 rating.addEventListener("change", function (e) {

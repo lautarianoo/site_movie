@@ -30,19 +30,19 @@
                         <span><b>Слоган:</b> {{ movie.tagline }}</span>
                     </li>
                     <li style="list-style: none">
-                                    <span><b>Режиссер:</b>
-                                        {% for director in movie.directors.all %}
-                                         <a href="{% url 'movies:actor_detail' director.name %}">
-                                            {{ director.name }}
-                                         </a>
-                                        {% endfor %}
-                                    </span>
+                        <span><b>Режиссер:</b>
+                            {% for director in movie.directors.all %}
+                                <a href="{{ director.get_absolute_url }}">
+                                    {{ director.name }}
+                                </a>
+                            {% endfor %}
+                        </span>
                     </li>
                     <li style="list-style: none"><span><b>Актеры:</b>
                         {% for actor in movie.actors.all %}
-                        <a href="{% url 'movies:actor_detail' actor.name %}">
-                            {{ actor.name }}
-                        </a>
+                            <a href="{{ actor.get_absolute_url }}">
+                                    {{ actor.name }}
+                            </a>
                         {% endfor %}
                                 </span>
                     </li>
@@ -52,14 +52,14 @@
                         {% endfor %}
                                     </span>
                     </li>
-                    <li style="list-style: none">
+                    <li>
                         <span><b>Премьера в мире:</b> {{ movie.world_premiere }}</span>
                     </li>
-                    <li style="list-style: none">
+                    <li>
                         <span><b>Бюджет:</b> ${{ movie.budget }}</span></li>
-                    <li style="list-style: none">
+                    <li>
                         <span><b>Сборы в США:</b> ${{ movie.fees_in_usa }}</span></li>
-                    <li style="list-style: none">
+                    <li>
                         <span><b>Сборы в мире:</b> ${{ movie.fess_in_world }}</span>
                     </li>
                     <li>
@@ -77,30 +77,32 @@
                             <span class="editContent">4.0</span>
                         </form>
                     </li>
-                    <div class="share-desc">
-                        <div class="share">
-                            <h4 class="editContent">
-                                Share:</h4>
-                            <ul class="w3layouts_social_list list-unstyled">
-                                <li>
-                                    <a href="#" class="w3pvt_facebook editContent">
-                                        <span class="fa fa-facebook-f"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="w3pvt_twitter editContent">
-                                        <span class="fa fa-twitter"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="w3pvt_dribble editContent">
-                                        <span class="fa fa-dribbble"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
+                </ul>
+
+                <div class="share-desc">
+                    <div class="share">
+                        <h4 class="editContent">
+                            Share:</h4>
+                        <ul class="w3layouts_social_list list-unstyled">
+                            <li>
+                                <a href="#" class="w3pvt_facebook editContent">
+                                    <span class="fa fa-facebook-f"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="w3pvt_twitter editContent">
+                                    <span class="fa fa-twitter"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="w3pvt_facebook editContent">
+                                    <span class="fa fa-vk"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
         <div class="row sub-para-w3layouts mt-5">
@@ -111,11 +113,12 @@
             <p>
                 {% for image in movie.movieshots_set.all %}
                     <img src="{{ image.image.url }}" class="img-movie-shots "
-                         alt="{{ image.description }}" style="max-width: 250px;">
+                         alt="{{ image.description }}" style="max-width: 200px;">
                 {% endfor %}
             </p>
             <p class="editContent">
                 {{ movie.description|safe }}
+            </p>
         </div>
         <hr>
         <div class="row">
@@ -189,11 +192,11 @@
             </div>
         {% endfor %}
     </div>
-    </div>
     <script>
         function addReview(name, id) {
             document.getElementById("contactparent").value = id;
             document.getElementById("contactcomment").innerText = `${name}, `
         }
+
     </script>
 {% endblock movie %}

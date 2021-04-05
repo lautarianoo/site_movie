@@ -22,7 +22,9 @@ class MovieView(GenreYears, ListView):
     #Список фильмов
     model = Movie
     queryset = Movie.objects.filter(draft=False)
+    paginate_by = 7
     template_name = 'movies/movies.html'
+
 
 
 class MovieDetailView(GenreYears, DetailView):
@@ -57,13 +59,21 @@ class ActorView(GenreYears, DetailView):
 
 class FilterMoviesView(GenreYears, ListView):
     '''Фильтр фильмов'''
+    paginate_by = 7
     template_name = 'movies/movies.html'
+
     def get_queryset(self):
         queryset = Movie.objects.filter(
             Q(year__in=self.request.GET.getlist("year")) |
             Q(genres__in=self.request.GET.getlist("genre"))
         ).distinct()
         return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
+        context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
+        return context
 
 class AddStarRating(View):
     """Добавление рейтинга фильму"""
@@ -86,3 +96,16 @@ class AddStarRating(View):
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=400)
+
+class SearchFilm(GenreYears, ListView):
+    '''Поиск фильмов'''
+    paginate_by = 7
+    template_name = 'movies/movies.html'
+
+    def get_queryset(self):
+        return Movie.objects.filter(title__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['q'] = f"q={self.request.GET.get('q')}&"
+        return context
