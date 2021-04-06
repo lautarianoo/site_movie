@@ -40,9 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'ckeditor',
     'ckeditor_uploader',
     'movies',
+    'contact',
+    'snowpenguin.django.recaptcha3',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'site_movie.urls'
@@ -199,3 +204,17 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'emailsenddjango@gmail.com'
+EMAIL_HOST_PASSWORD = 'lautariano'
+EMAIL_PORT = 587
+
+
+RECAPTCHA_PUBLIC_KEY = '6Lf2M54aAAAAACuHHjMxtf71wSq01NclhJEWuTf_'
+RECAPTCHA_PRIVATE_KEY = '6Lf2M54aAAAAAKPP-NkqGCPmvFj5JnlHLutogojr'
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5
+
+SITE_ID = 1
