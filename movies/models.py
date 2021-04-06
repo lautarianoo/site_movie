@@ -72,6 +72,7 @@ class Movie(models.Model):
     )
     url = models.SlugField(max_length=130, unique=True)
     draft = models.BooleanField("Черновик", default=False)
+    timestamp = models.DateField(auto_now_add=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("movies:movies-detail", kwargs={"slug": self.url})

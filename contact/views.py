@@ -2,7 +2,7 @@ from django.views.generic import CreateView
 
 from .models import Contact
 from .forms import ContactForm
-from .service import send
+from .service import send_first
 
 
 class ContactView(CreateView):
@@ -13,5 +13,5 @@ class ContactView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        send(form.instance.email)
+        send_first(form.instance.email)
         return super().form_valid(form)
