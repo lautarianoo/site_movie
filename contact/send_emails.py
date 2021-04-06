@@ -22,10 +22,10 @@ text_content = 'Вышел новый фильм на сайте'
 from_email = EMAIL_HOST_USER
 html = ''
 qs = Contact.objects.all().values()
-movies = Movie.objects.filter().values()
+movies = Movie.objects.filter(timestamp=today).values()
 for q in qs:
     for movie in movies:
-        html += f'<div><h3><a href="{ movie["poster"] }">{ movie["title"] }</a></h3><h5 align="right">{ movie["tagline"] }</h5></div>'
+        html += f'<div><h3><img href="{ movie["poster"] }">{ movie["title"] }</h3><h5 align="right">{ movie["tagline"] }</h5></div>'
         html += f'<p>{movie["description"]}</p>'
         html += f'<p>{movie["year"]}</p><br>'
     to = q['email']
