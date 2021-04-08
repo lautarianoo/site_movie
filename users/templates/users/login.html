@@ -45,8 +45,22 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li><a href="contact.html"
+                <li>
+                      {% if user.is_authenticated %}
+                    <li><a href="#"
+                       style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Настройки</a>
+                        </li>
+                        <li><a href="{% url 'users:logout' %}"
+                       style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Выйти</a>
+                        </li>
+                       {% else %}
+                         <li><a href="{% url 'users:login' %}"
                        style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Вход</a>
+                        </li>
+                    <li><a href="{% url 'users:register' %}"
+                       style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Регистрация</a>
+                        </li>
+                      {% endif %}
                 </li>
             </ul>
         </nav>
