@@ -14,6 +14,7 @@ django.setup()
 from contact.models import Contact
 from movies.models import Movie
 from site_movie.settings import EMAIL_HOST_USER
+from django.contrib.auth import get_user_model
 ADMIN_USER = EMAIL_HOST_USER
 
 today = datetime.date.today()
@@ -21,15 +22,20 @@ subject = f'Новый фильм на сайте КиноВселенной! {t
 text_content = 'Вышел новый фильм на сайте'
 from_email = EMAIL_HOST_USER
 html = ''
-qs = Contact.objects.all().values()
+User = get_user_model()
+
+qs = User.objects.filter(send_email=True).values()
+contacts = Contact.objects.all().values()
 movies = Movie.objects.filter(timestamp=today).values()
 for q in qs:
     for movie in movies:
         html += f'<div><h3><img href="{ movie["poster"] }">{ movie["title"] }</h3><h5 align="right">{ movie["tagline"] }</h5></div>'
         html += f'<p>{movie["description"]}</p>'
         html += f'<p>{movie["year"]}</p><br>'
-    to = q['email']
-    time.sleep(2)
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-    msg.attach_alternative(html, "text/html")
-    msg.send()
+    if q['send_email'] == True:
+        to = q['email']
+        time.sleep(2)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html, "text/html")
+        msg.send()
+a = 1

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import check_password
+from movies.models import Genre
 
 User = get_user_model()
 
@@ -37,3 +38,15 @@ class UserRegisterForm(forms.ModelForm):
         if data['password1'] != data['password2']:
             raise forms.ValidationError('Пароли не совпадают')
         return data['password2']
+
+class UserUpdateForm(forms.ModelForm):
+    name = forms.CharField(label='Username', max_length=80, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    movie_categories = forms.ModelChoiceField(label='Жанр фильма(для рассылки)', queryset=Genre.objects.all(),
+                                                to_field_name='url', widget=forms.Select(attrs={
+            'class': 'form-control'
+        }), required=True)
+    send_email = forms.BooleanField(label='Получать рассылку?', widget=forms.CheckboxInput(), required=False)
+
+    class Meta:
+        model = User
+        fields = ('name', 'movie_categories', 'send_email', )

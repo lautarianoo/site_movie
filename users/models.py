@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import UserManager
+from movies.models import Genre
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, name, password=None):
@@ -43,7 +44,8 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     name = models.CharField(max_length=50, null=True, blank=True)
-    send_email = models.BooleanField(default=True)
+    send_email = models.BooleanField(default=False)
+    movie_categories = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = MyUserManager()
 

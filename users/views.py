@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .forms import UserLoginForm, UserRegisterForm
+from contact.models import Contact
+from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm
 
 def login_view(request):
     form = UserLoginForm(request.POST or None)
@@ -28,3 +29,26 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('movies:movies-list'))
+
+def settings_view(request):
+    if request.user.is_authenticated:
+        user = request.user
+        contacts = Contact.objects.all().values()
+        for contact in contacts:
+            if user.email == contact['email']:
+                user.send_email = True
+            else:
+                continue
+        if request.method == 'POST':
+            form = UserUpdateForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                user.name = data['name']
+                user.movie_categories = data['movie_categories']
+                user.send_email = data['send_email']
+                user.save()
+                return HttpResponseRedirect(reverse('movies:movies-list'))
+        form = UserUpdateForm(initial={'name': user.name, 'movie_categories': user.movie_categories, 'send_email': user.send_email})
+        return render(request, 'users/update.html', {'form': form})
+    else:
+        return HttpResponseRedirect(reverse('users:login'))
