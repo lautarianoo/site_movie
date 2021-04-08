@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
+{% load movie_tags %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 
-</body>
-</html>
+    <!-- Bootstrap-Core-CSS -->
+    <!--/ Style-CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <!--// Style-CSS -->
+    <!-- font-awesome-icons -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+    <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+
+<header class="header bg-dark">
+    <div class="container-fluid px-lg-5">
+        <!-- nav -->
+        <nav class="py-4 bg-dark">
+            <div id="logo">
+                <h1><a href="{% url 'movies:movies-list' %}" class="editContent"
+                       style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family: Source Sans Pro;, sans-serif;">КиноВселенная</a>
+                </h1>
+            </div>
+
+            <label for="drop" class="toggle">Menu</label>
+            <input type="checkbox" id="drop">
+            <ul class="menu mt-2">
+                <li class="active"><a href="login.html">Главная</a></li>
+                <li>
+                    <!-- First Tier Drop Down -->
+                    <label for="drop-2" class="toggle">Категории <span
+                            class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                    <a href="#">Категории <span class="fa fa-angle-down"
+                                                aria-hidden="true"></span></a>
+                    <input type="checkbox" id="drop-2">
+                    <ul>
+                        {% get_categories as categories %}
+                        {% for category in categories %}
+                            <li><a href="/">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="contact.html"
+                       style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Вход</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- //nav -->
+    </div>
+</header>
+
+
+    <div class="row">
+      <div class="col-md-8 mx-auto" style="padding: 50px;
+      position: fixed; top: 40%; left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);">
+          <h2 class="my-2" align="center">Приветствуем нового пользователя {{ new_user.name }}</h2>
+          <h4 align="center">Вы зарегистрировались в системе. <a href="{% url 'users:login' %}">Войти</a></h4>
+      </div>
+    </div>

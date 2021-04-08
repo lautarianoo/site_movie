@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -24,3 +24,7 @@ def register_view(request):
         new_user.save()
         return render(request, 'users/register_done.html', {'new_user': new_user})
     return render(request, 'users/register.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('movies:movies-list'))
