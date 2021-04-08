@@ -7,7 +7,7 @@ from movies.models import Movie, Category, Actor, Genre, Rating
 from .forms import ReviewForm, RatingForm
 
 def index(request):
-    return render(request, 'movies/index.html', {})
+    return render(request, 'movies/login.html', {})
 
 class GenreYears:
     """Жанры и года выхода фильмов"""

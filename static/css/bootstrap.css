@@ -481,12 +481,10 @@ mark,
   max-width: 100%;
   height: auto;
 }
-
 .img-movie-shots {
-    max-width: 100px;
-    height: auto;
+  max-width: 250px;
+  height: auto;
 }
-
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
@@ -1117,7 +1115,7 @@ pre code {
   .col-md-6 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50%;
-    flex: 0 0 30%;
+    flex: 0 0 50%;
     max-width: 50%;
   }
   .col-md-7 {
