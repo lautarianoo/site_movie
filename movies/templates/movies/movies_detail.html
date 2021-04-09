@@ -164,7 +164,7 @@
         </div>
         {% for review in movie.get_review %}
             <div class="media py-5">
-                <img src="{% static 'images/te2.jpg' %}" class="mr-3 img-fluid" alt="image">
+                <img src="{% static 'images/48-488554_power-golf-therapy-has-played-a-major-role.png' %}" class="mr-3 img-fluid" alt="image" style="max-width: 70px;">
                 <div class="media-body mt-4">
                     <h5 class="mt-0 editContent">
                         {{ review.name }}
@@ -177,8 +177,8 @@
                     {% for rew in review.reviews_set.all %}
                         <div class="media mt-5 editContent">
                             <a class="pr-3" href="#">
-                                <img src="{% static 'images/te2.jpg' %}" class="img-fluid "
-                                     alt="image">
+                                <img src="{% static 'images/48-488554_power-golf-therapy-has-played-a-major-role.png' %}" class="img-fluid "
+                                     alt="image" style="max-width: 70px;">
                             </a>
                             <div class="media-body">
                                 <h5 class="mt-0 editContent">{{ rew.name }}</h5>

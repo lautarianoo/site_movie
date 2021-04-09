@@ -2,7 +2,16 @@
 <div class="search-bar w3layouts-newsletter">
     <h3 class="sear-head editContent">Поиск фильма</h3>
     <form action="{% url 'movies:search_film' %}" method="get" class="d-flex editContent">
-        <input type="search" placeholder="Введите название..." name="q"
+        <input type="search" placeholder="Введите название фильма..." name="q"
+               class="form-control" required="">
+        <button type="submit" class="btn1 btn"><span class="fa fa-search"
+                                       aria-hidden="true"></span></button>
+    </form>
+</div>
+<div class="search-bar w3layouts-newsletter" style="margin-top: 20px;">
+    <h3 class="sear-head editContent">Поиск актёра</h3>
+    <form action="{% url 'movies:search_actor' %}" method="get" class="d-flex editContent">
+        <input type="search" placeholder="Введите имя актёра..." name="actor"
                class="form-control" required="">
         <button type="submit" class="btn1 btn"><span class="fa fa-search"
                                        aria-hidden="true"></span></button>
@@ -37,6 +46,7 @@
     </div>
     <button type="submit">Найти</button>
 </form>
+
 <!-- //discounts -->
 <!-- reviews -->
 <div class="customer-rev left-side my-4">

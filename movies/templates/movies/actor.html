@@ -30,12 +30,6 @@
                             {% endfor %}
                         </span>
                     </li>
-                    <li><span><b>Актер:</b>
-                        {% for movie in actor.film_actor.all %}
-                            {{ movie.title }}
-                        {% endfor %}
-                    </span>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -47,5 +41,46 @@
                 {{ actor.description|safe }}
             </p>
         </div>
+        <h3 class="shop-sing editContent">
+            ФИЛЬМЫ
+        </h3>
+        <div class="left-ads-display col-lg-9">
+    <div class="row">
+        {% for movie in actor.film_director.all %}
+        <div class="col-md-4 product-men">
+            <div class="product-shoe-info editContent text-center mt-lg-4">
+                <div class="men-thumb-item">
+                    <img src="{{ movie.poster.url }}" class="img-fluid" alt="">
+                </div>
+                <div class="item-info-product">
+                    <h4 class="">
+                        <a href="{% url 'movies:movies-detail' movie.url %}"
+                           class="editContent">
+                            {{ movie.title }}
+                        </a>
+                    </h4>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% for movie in actor.film_actor.all %}
+        <div class="col-md-4 product-men">
+            <div class="product-shoe-info editContent text-center mt-lg-4">
+                <div class="men-thumb-item">
+                    <img src="{{ movie.poster.url }}" class="img-fluid" alt="">
+                </div>
+                <div class="item-info-product">
+                    <h4 class="">
+                        <a href="{% url 'movies:movies-detail' movie.url %}"
+                           class="editContent">
+                            {{ movie.title }}
+                        </a>
+                    </h4>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 {% endblock movie %}

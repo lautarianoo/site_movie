@@ -25,8 +25,6 @@ class MovieView(GenreYears, ListView):
     paginate_by = 7
     template_name = 'movies/movies.html'
 
-
-
 class MovieDetailView(GenreYears, DetailView):
     #Детализация фильмов
     model = Movie
@@ -110,3 +108,24 @@ class SearchFilm(GenreYears, ListView):
         context = super().get_context_data(*args, **kwargs)
         context['q'] = f"q={self.request.GET.get('q')}&"
         return context
+
+class Actorlist(GenreYears, ListView):
+    model = Actor
+    queryset = Actor.objects.all()
+    paginate_by = 8
+    template_name = 'movies/actor_list.html'
+
+class SearchActor(GenreYears, ListView):
+    '''Поиск актёров'''
+    paginate_by = 8
+    template_name = 'movies/actor_list.html'
+
+    def get_queryset(self):
+        return Actor.objects.filter(name__icontains=self.request.GET.get('actor'))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['actor'] = f"actor={self.request.GET.get('actor')}&"
+        return context
+
+
