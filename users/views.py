@@ -44,11 +44,11 @@ def settings_view(request):
             if form.is_valid():
                 data = form.cleaned_data
                 user.name = data['name']
-                user.movie_categories = data['movie_categories']
+                user.genres = data['genres']
                 user.send_email = data['send_email']
                 user.save()
                 return HttpResponseRedirect(reverse('movies:movies-list'))
-        form = UserUpdateForm(initial={'name': user.name, 'movie_categories': user.movie_categories, 'send_email': user.send_email})
+        form = UserUpdateForm(initial={'name': user.name, 'genres': user.genres, 'send_email': user.send_email})
         return render(request, 'users/update.html', {'form': form})
     else:
         return HttpResponseRedirect(reverse('users:login'))

@@ -45,7 +45,7 @@ class MyUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     name = models.CharField(max_length=50, null=True, blank=True)
     send_email = models.BooleanField(default=False)
-    movie_categories = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True, blank=True)
+    genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = MyUserManager()
 
